@@ -14,11 +14,12 @@ import org.w3c.dom.NodeList;
 
 public class ParseFile {
 
-	public void read() {
+	public NodeList read() {
+		Document document = null;
 		try {
 			File file = getFileFromResource("struct.xml");
 			DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document document = documentBuilder.parse(file);
+			document = documentBuilder.parse(file);
 			System.out.println("Root element: " + document.getDocumentElement().getNodeName());
 			if (document.hasChildNodes()) {
 				printNodeList(document.getChildNodes());
@@ -26,6 +27,7 @@ public class ParseFile {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return document.getChildNodes();
 	}
 
 	private static void printNodeList(NodeList nodeList) {
